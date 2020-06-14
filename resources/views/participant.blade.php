@@ -19,9 +19,9 @@
                             {{ $course->start->format('d.m.Y') }}:
                             <span
                                 @if($kursID == $course->course_id)
-                                    class="text-primary font-weight-bold"
+                                    class="text-primary"
                                 @endif
-                            >{{ $course->course }}</span><br>
+                            ><b>{{ $course->course }}</b></span><br>
                         @endforeach
                     </td>
                 </tr>
