@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{ class }} extends Model
+{
+        protected $fillable = [];
+        protected $appends = [];
+        // habe keine spalten created_at, updated_at
+        public $timestamps = true;
+}
