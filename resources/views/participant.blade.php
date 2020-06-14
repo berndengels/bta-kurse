@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ $item }}</td>
                     <td>
-                        @foreach($course->course as $course)
+                        @foreach($item->courses as $course)
                             {{ $course->start->format('d.m.Y') }}:
                             <span
                                 @if($kursID == $course->course_id)
