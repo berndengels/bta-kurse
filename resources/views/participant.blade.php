@@ -18,7 +18,7 @@
                         @foreach($item->courses as $course)
                             {{ $course->start->format('d.m.Y') }}:
                             <span
-                                @if($kursID == $course->course_id)
+                                @if((int) $kursID === $course->course_id)
                                     class="text-primary"
                                 @endif
                             ><b>{{ $course->course }}</b></span><br>
