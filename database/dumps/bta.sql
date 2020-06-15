@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.4.11-MariaDB)
 # Datenbank: bta
-# Erstellt am: 2020-06-14 16:27:21 +0000
+# Erstellt am: 2020-06-14 19:51:12 +0000
 # ************************************************************
 
 
@@ -31,7 +31,8 @@ CREATE TABLE `coursedates` (
   `start` date NOT NULL,
   `end` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `course_id` (`course_id`)
+  KEY `course_id` (`course_id`),
+  CONSTRAINT `coursedates_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 LOCK TABLES `coursedates` WRITE;
@@ -74,48 +75,6 @@ VALUES
 UNLOCK TABLES;
 
 
-# Export von Tabelle failed_jobs
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `failed_jobs`;
-
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
-
-# Export von Tabelle migrations
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `migrations`;
-
-CREATE TABLE `migrations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-LOCK TABLES `migrations` WRITE;
-/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`)
-VALUES
-	(1,'2014_10_12_000000_create_users_table',1),
-	(2,'2014_10_12_100000_create_password_resets_table',1),
-	(3,'2019_08_19_000000_create_failed_jobs_table',1);
-
-/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
 # Export von Tabelle participant_coursedate
 # ------------------------------------------------------------
 
@@ -127,7 +86,9 @@ CREATE TABLE `participant_coursedate` (
   `course_date_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `participant_id` (`participant_id`),
-  KEY `course_date_id` (`course_date_id`)
+  KEY `course_date_id` (`course_date_id`),
+  CONSTRAINT `participant_coursedate_ibfk_1` FOREIGN KEY (`participant_id`) REFERENCES `participants` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `participant_coursedate_ibfk_2` FOREIGN KEY (`course_date_id`) REFERENCES `coursedates` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 LOCK TABLES `participant_coursedate` WRITE;
@@ -174,49 +135,6 @@ VALUES
 	(5,'Albert Einstein');
 
 /*!40000 ALTER TABLE `participants` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Export von Tabelle password_resets
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `password_resets`;
-
-CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  KEY `password_resets_email_index` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
-
-# Export von Tabelle users
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`)
-VALUES
-	(1,'admin','engels@f50.de',NULL,'$2y$10$8yvy7cF7FJaaOwnF8syTaue/f1Di553GoKgkHYx2rbuAFhgioSpnW',NULL,'2020-06-14 12:21:04','2020-06-14 12:21:04');
-
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
