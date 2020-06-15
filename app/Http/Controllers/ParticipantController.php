@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Database\Eloquent\Builder;
 
 class ParticipantController extends Controller
 {
@@ -14,10 +14,13 @@ class ParticipantController extends Controller
      *
      * @return Response
      */
-    public function index($kursID = null)
+    public function index($courseID = null)
     {
-        $data = ($kursID > 0) ? Participant::filterByCourseId($kursID) : Participant::all();
-        return view('participant', compact('data','kursID'));
+        $courses = Course::all()->keyBy('id')->map(function ($item) {
+            return $item->name;
+        });
+        $data = ($courseID > 0) ? Participant::filterByCourseId($courseID) : Participant::all();
+        return view('participant', compact('data','courseID','courses'));
     }
 
     /**
