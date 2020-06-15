@@ -16,6 +16,9 @@ if NOT exist .htaccess (
 
 php artisan key:generate
 
+echo run migrations
+php artisan migrate
+
 echo clear all caches
 php artisan cache:clear
 php artisan config:clear

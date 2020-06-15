@@ -31,6 +31,8 @@ if [ "$appKey" == "" ]; then
 else
     echo "APP_KEY seems to be valid: $appKey"
 fi
+echo "run migrations"
+php artisan migrate
 
 echo "clear all caches"
 php artisan cache:clear

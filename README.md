@@ -1,7 +1,8 @@
 ## laravel bta-kurse
 
 Nach dem clonen des Git-Repositories von Github (https://github.com/berndengels/bta-kurse.git)
-folgendes per Terminal im Projektverzeichnis (bta-kurse) ausführen:
+folgendes per Terminal im
+ Projektverzeichnis (bta-kurse) ausführen:
 
 - erstelle eine MySQL Datenbank namens 'bta' und importiere darin die SQL-Datei aus database/dumps/bta.sql.
 - (linux, macosx) setup
@@ -16,6 +17,18 @@ folgendes per Terminal im Projektverzeichnis (bta-kurse) ausführen:
 - npm run dev
 - .env.local kopieren nach .env und die darin enthaltenen Conf-Daten anpassen
  z.B DB Zugangsdaten
+
+### Datenbank Zugriff
+In der .env Datei die DB Zugriffsdaten anpassen:
+z.B:
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=bta
+DB_USERNAME=bta
+DB_PASSWORD=bta
+```
 
 #### Für Windows DNS in host Datei eintragen (C:\Window\System32\drivers\etc\hosts)
 #### Für Mac OSX, Linux DNS in host Datei eintragen (/etc/hosts)
