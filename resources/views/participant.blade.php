@@ -7,7 +7,7 @@
     <div class="float-right w-50 mr-0 pr-0">
         <form id="frm" method="get">
             @csrf
-            <x-inp.select name="courseID" label="Kurs" :options="$courses" />
+            <x-inp.select name="courseID" label="Kurs" :options="$courses" value="{{ $courseID ?? null }}" />
         </form>
     </div>
 @endsection
@@ -27,7 +27,7 @@
                         @foreach($item->courses as $course)
                             {{ $course->start->format('d.m.Y') }}:
                             <span
-                                @if((int) $courseID === $course->course_id)
+                                @if( isset($courseID) && (int) $courseID === $course->course_id)
                                     class="text-primary"
                                 @endif
                             ><b>{{ $course->course }}</b></span><br>
